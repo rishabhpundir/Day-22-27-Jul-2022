@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% get_media_prefix as MEDIA_URL %}
+{% block title %}Klub™ | Login{% endblock title %}
+{% block login-active %}active{% endblock login-active %}
+{% block body %}
+
+<div class="container mb-5">
+
+    <h1 class="text-center my-5"><strong>Klub™ Members Login Area</strong></h1>
+
+    {% if login_success == False %}
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Oops!</strong> Invalid Credentials. Please Try Again.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    {% endif %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="user_name">Username</label>
+            <input type="text" class="form-control" id="user_name" name="user_name" aria-describedby="emailHelp"
+                placeholder="Enter your username">
+        </div>
+        <div class="form-group">
+            <label for="user_pass">Password</label>
+            <input type="password" class="form-control" id="user_pass" name="user_pass" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+
+</div>
+
+{% endblock body %}

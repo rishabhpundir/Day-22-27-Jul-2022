@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% get_media_prefix as MEDIA_URL %}
+{% block title %}Klub™ | Add Event{% endblock title %}
+{% block add-event-active %}active{% endblock add-event-active %}
+{% block body %}
+
+<div class="container mb-5">
+
+    <h1 class="text-center my-3"><strong>Add Event</strong></h1>
+
+    {% if user.is_authenticated %}
+
+    {% if submitted %}
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Event added successfully.</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    {% else %}
+    <h6 class="text-right"><strong>Logged in User :</strong> {{user}}</h6>
+    <form action="" enctype="multipart/form-data" method=POST>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    {% endif %}
+
+    {% else %}
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Uh! You need to be logged in for this previlige! <a href="{% url 'register_link' %}">Register</a> Or <a href="{% url 'login_link' %}">Login</a> here.</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+    {% endif %}
+
+</div>
+
+{% endblock body %}

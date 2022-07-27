@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Klub™ | Register{% endblock title %}
+{% block register-active %}active{% endblock register-active %}
+{% block body %}
+
+<div class="container mb-5">
+
+    <h1 class="text-center mt-3"><strong>Klub™ Members Registration</strong></h1>
+
+    {% if form.errors %}
+
+    <div class="alert alert-warning alert-dismissible fade show mt-5" role="alert">
+        <h6>Yikes! There were errors in your form inputs.<strong> Please read the instructions carefully and try
+                again.</strong></h6>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    {% endif %}
+
+    <div class="shadow p-4 my-5 bg-body rounded">
+        <div class="form-group mt-3">
+            <form action="{% url 'register_link' %}" method="POST">
+                {% csrf_token %}
+
+                {{form.as_p}}
+
+                <button type="submit" class="btn btn-danger">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

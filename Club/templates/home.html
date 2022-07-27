@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% get_media_prefix as MEDIA_URL %}
+{% block title %}Klub™ | Home{% endblock title %}
+{% block home-active %}active{% endblock home-active %}
+{% block body %}
+<div class="container mb-5 width: 100%">
+    <div class="text-center mt-3 mb-5">
+        <h1><strong>Upcoming Events</strong></h1>
+        {% if login_success == True %}
+
+        <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+            <strong>Login successful!</strong> Welcome to the Klub™ Members Lounge.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        {% elif logged_out == True %}
+
+        <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+            You were <strong>logged out</strong> successfully!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        {% elif event_deleted == True %}
+
+        <div class="alert alert-danger alert-dismissible fade show mt-5" role="alert">
+            <strong>Event deleted.</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        {% elif registered == True %}
+
+        <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+            <h6><strong>Registration successful!</strong> You are now part of the Klub™. Congratulations!</h6>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        {% endif %}
+
+    </div>
+    <div class="row">
+
+        {% for event in events %}
+        <div class="col-sm">
+            <div class="card my-3" style="width: 33rem;">
+                <img class="card-img-top" src="{% get_media_prefix %}{{event.venue_image}}">
+                <div class="card-body">
+                    <h3 class="card-title text-center"><strong>{{event.event_name}}</strong></h3>
+                    <div class="text-center">
+                        <a href="{% url 'event_details_link' event.id %}" class="btn btn-success mt-3 py-2">
+                            Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock body %}
