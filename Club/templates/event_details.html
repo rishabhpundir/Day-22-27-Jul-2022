@@ -36,7 +36,8 @@
                     <a href="{% url 'delete_event_link' event.id %}" class="btn btn-danger mt-1 py-1">Delete</a>
                 </div>
                 {% else %}
-                <strong>To edit events, <a href="{% url 'register_link' %}">Register</a> Or <a href="{% url 'login_link' %}">Login</a> here.</strong>
+                <strong>To edit events, <a href="{% url 'register_link' %}">Register</a> Or <a
+                        href="{% url 'login_link' %}">Login</a> here.</strong>
                 {% endif %}
             </div>
         </div>
